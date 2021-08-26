@@ -1,34 +1,17 @@
 package io.justinjordan.userlogin;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.util.Scanner;
 
 public class UserService {
-    public static boolean attemptLogin() {
-        Scanner scanner = new Scanner(System.in);
-
-        // ask for username
-        System.out.println("Username: ");
-        String username = scanner.nextLine();
+    public static User login(String username, String password) {
         User user = getUser(username);
 
-        // check username
-        if (user == null) {
-            return false;
+        if (user == null || !user.checkPassword(password)) {
+            return null;
         }
 
-        // ask for password
-        System.out.println("Password: ");
-        String password = scanner.nextLine();
-
-        // check password
-        if (!user.checkPassword(password)) {
-            return false;
-        }
-
-        return true;
+        return user;
     }
 
     public static User getUser(String username) {
