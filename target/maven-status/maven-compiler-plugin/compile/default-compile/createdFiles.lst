@@ -1,3 +1,10 @@
+io\justinjordan\userlogin\DataStorage.class
+io\justinjordan\userlogin\Setting.class
+io\justinjordan\userlogin\settings\ChangePassword.class
+io\justinjordan\userlogin\MenuItem.class
 io\justinjordan\userlogin\UserService.class
+io\justinjordan\userlogin\Session.class
+io\justinjordan\userlogin\UserInput.class
+io\justinjordan\userlogin\Menu.class
 io\justinjordan\userlogin\User.class
 io\justinjordan\userlogin\App.class

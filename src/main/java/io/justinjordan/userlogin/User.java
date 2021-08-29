@@ -12,4 +12,8 @@ public class User {
     public boolean checkPassword(String password) {
         return this.password.equals(password);
     }
+
+    public void save() {
+        UserService.updateUser(this);
+    }
 }

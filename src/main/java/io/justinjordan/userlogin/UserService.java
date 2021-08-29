@@ -1,7 +1,7 @@
 package io.justinjordan.userlogin;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileWriter;
 
 public class UserService {
     public static User login(String username, String password) {
@@ -15,8 +15,9 @@ public class UserService {
     }
 
     public static User getUser(String username) {
+
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/users.csv"));
+            BufferedReader reader = DataStorage.getReader();
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -35,8 +36,32 @@ public class UserService {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            DataStorage.cleanUp();
         }
 
         return null;
+    }
+
+    public static void updateUser(User user) {
+        try {
+            BufferedReader reader = DataStorage.getReader();
+            FileWriter writer = DataStorage.getWriter();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+
+                if (user.getUsername().equals(parts[0])) {
+                    writer.write(user.getUsername() + "," + user.getPassword() + "," + user.getName() + "," + user.getLocation() + "\n");
+                } else {
+                    writer.write(line + "\n");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Update User Error: " + e.getMessage());
+        } finally {
+            DataStorage.cleanUp();
+        }
     }
 }
